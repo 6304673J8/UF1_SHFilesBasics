@@ -2,13 +2,17 @@
 
 echo "EJERCICIO MD5 y BUCLES"
 
-for VARIABLE in `ls *.mp4`; do
+for FILE in `ls *.mp4`; do
 	echo "_____________"
-	VIDEO=`file $VARIABLE | grep Media`
+	VIDEO=`file $FILE | grep -i Media`
+	echo $VIDEO
 	if [ "$VIDEO" != "" ]; then
-		md5sum $VARIABLE
+		#md5sum $FILE
+		NAME=`echo $FILE | cut -d "." -f 1`
+
+		ffmpeg -i $FILE $NAME.mkv 
 	fi	
-		md5sum $VARIABLE | awk '{ print $2 }' | cowsay
-		md5sum $VARIABLE | awk '{ print $1 }' | cowsay
+
+
 done
 
